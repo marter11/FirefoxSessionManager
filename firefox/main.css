@@ -1,0 +1,44 @@
+
+:root {
+    --left-width: 40%;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    min-width: 700px;
+    min-height: 500px;
+    /* max-height: 500px; */
+}
+
+#header {
+    top: 0;
+    background-color: #65812B;
+    min-width: 700px;
+    min-height: 60px;
+}
+
+#body {
+    margin: 15px 15px;
+}
+
+#left {
+    position: relative;
+    min-height: 500px;
+    min-width: var(--left-width);
+}
+
+#sessions_side {
+    max-width: var(--left-width);
+    max-height: 450px;
+    overflow: auto;
+    overflow-x: hidden;
+}
+
+#save_section {
+    min-width: var(--left-width);
+    margin: 5px 0px;
+    position: absolute;
+    bottom: 0;
+    background-color: aqua;
+}

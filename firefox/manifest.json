@@ -1,0 +1,19 @@
+{
+    "manifest_version": 2,
+    "name": "Test",
+    "version": "1.0",
+    
+    "description": "Learning extensions",
+    "icons": {},
+
+    "browser_action": {
+        "default_title": "TEST",
+        "default_popup": "main.html"
+    },
+
+    "permissions": [
+        "tabs",
+        "storage"
+    ]
+
+}
