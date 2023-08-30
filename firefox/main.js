@@ -38,13 +38,20 @@ function saveInfoFromOpenWindows(session_name, tabsArray)
     return saveInfoFromOpenWindowsPromise;
 }
 
+
+function displayWinowInstances(event)
+{
+    // const location = 
+}
+
 // An instance of this represents the session itself
 class sessionSectionConstructor
 {
-    constructor()
+    constructor(session_name)
     {
         this.newSessionContainer = document.createElement("div");
         this.newSessionContainer.setAttribute("class", "sessionContainer");
+        this.newSessionContainer.innerText = session_name;
     }
 
     // Automatically add it to the current session, which is the created object
@@ -53,6 +60,9 @@ class sessionSectionConstructor
 
         let newwindowContainer = document.createElement("div");
         newwindowContainer.setAttribute("class", "windowContainer");
+
+        // Reveal when session container is clicked
+        newwindowContainer.setAttribute("hidden", true);
 
         this.newSessionContainer.appendChild(newwindowContainer);
 
@@ -65,6 +75,13 @@ class sessionSectionConstructor
         let newtabContainer = document.createElement("div");
         newtabContainer.setAttribute("class", "tabContainer");
 
+        // Add title paragraph
+        let tabTitle = document.createElement("p");
+        tabTitle.innerText = tab.title;
+
+        // Add favico
+
+        newtabContainer.appendChild(tabTitle);
         to_window.appendChild(newtabContainer);
     }
 
@@ -77,10 +94,10 @@ class sessionSectionConstructor
 
 }
 
-function insertSessionsIntoHTML(session_object)
+function insertSessionsIntoHTML(session_name, session_object)
 {
     const location = document.getElementById("session_side");
-    const sessionConsturctorObject = new sessionSectionConstructor();
+    const sessionConsturctorObject = new sessionSectionConstructor(session_name);
 
     for(const window of session_object)
     {
@@ -88,7 +105,7 @@ function insertSessionsIntoHTML(session_object)
 
         for(const tab of window)
         {
-            sessionConsturctorObject.addNewTab(newWindow);
+            sessionConsturctorObject.addNewTab(newWindow, tab);
         }
     }
 
@@ -106,7 +123,7 @@ function DisplayFromLocalStorage()
         for(const session_key of session_keys)
         {
             let session_object = all_session_object[session_key];
-            insertSessionsIntoHTML(session_object);
+            insertSessionsIntoHTML(session_key, session_object);
         }
     })
 
