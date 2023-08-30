@@ -23,9 +23,7 @@ function getInfoFromOpenWindows()
 function saveInfoFromOpenWindows(session_name, tabsArray)
 {
 
-    browser.storage.local.clear();
-
-    // browser.storage.local.onChanged.addListener((e) => console.log("CHANGE"));
+    // browser.storage.local.clear();
 
     // An array represents a window, it stores a window worth of tabs
     session_object = {};
@@ -40,13 +38,78 @@ function saveInfoFromOpenWindows(session_name, tabsArray)
     return saveInfoFromOpenWindowsPromise;
 }
 
-function LoadInfoFromLocalStorage()
+// An instance of this represents the session itself
+class sessionSectionConstructor
 {
-    let a = browser.storage.local.get()
-    .then(session => {
-        console.log("RAN", session);
-        return session;
+    constructor()
+    {
+        this.newSessionContainer = document.createElement("div");
+        this.newSessionContainer.setAttribute("class", "sessionContainer");
+    }
+
+    // Automatically add it to the current session, which is the created object
+    addNewWindow(window)
+    {
+
+        let newwindowContainer = document.createElement("div");
+        newwindowContainer.setAttribute("class", "windowContainer");
+
+        this.newSessionContainer.appendChild(newwindowContainer);
+
+        return newwindowContainer;
+
+    }
+
+    addNewTab(to_window, tab)
+    {
+        let newtabContainer = document.createElement("div");
+        newtabContainer.setAttribute("class", "tabContainer");
+
+        to_window.appendChild(newtabContainer);
+    }
+
+    commit(section_to)
+    {
+        const location = document.getElementById("session_side");
+        location.appendChild(this.newSessionContainer);
+    }
+
+
+}
+
+function insertSessionsIntoHTML(session_object)
+{
+    const location = document.getElementById("session_side");
+    const sessionConsturctorObject = new sessionSectionConstructor();
+
+    for(const window of session_object)
+    {
+        const newWindow = sessionConsturctorObject.addNewWindow(window);
+
+        for(const tab of window)
+        {
+            sessionConsturctorObject.addNewTab(newWindow);
+        }
+    }
+
+    sessionConsturctorObject.commit();
+
+}
+
+function DisplayFromLocalStorage()
+{
+    browser.storage.local.get().then(all_session_object => {
+        
+        // Insert the whole local storage into the session display section
+        const session_keys = Object.keys(all_session_object);
+
+        for(const session_key of session_keys)
+        {
+            let session_object = all_session_object[session_key];
+            insertSessionsIntoHTML(session_object);
+        }
     })
+
     .catch(err => console.log(err));
 
 }
@@ -63,13 +126,20 @@ const saveSession = (name) => {
             sessionArray.push(value);
         }
         
+        // Save current session and load it to the UI
         saveInfoFromOpenWindows(name, sessionArray);
-        LoadInfoFromLocalStorage();
+        DisplayFromLocalStorage();
     }
 
     resolvePromise();
 }
 
+
+// Handler section
+
+window.addEventListener('load', (e) => {
+    DisplayFromLocalStorage();
+});
 
 document.addEventListener("submit", (e) => {
     e.preventDefault();

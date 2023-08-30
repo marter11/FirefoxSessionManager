@@ -28,7 +28,7 @@ body {
     min-width: var(--left-width);
 }
 
-#sessions_side {
+#session_side {
     max-width: var(--left-width);
     max-height: 450px;
     overflow: auto;
