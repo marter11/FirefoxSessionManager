@@ -20,16 +20,21 @@ body {
 
 #body {
     margin: 15px 15px;
-    /* display: flex; */
+    display: flex;
 }
 
 #left {
-    position: relative;
+    /* position: relative; */
+    flex: 40%;
     min-height: 500px;
     min-width: var(--left-width);
 }
+#right {
+    flex: 60%;
+}
 
 #session_side {
+    min-width: 100%;
     max-width: var(--left-width);
     max-height: 450px;
     overflow: auto;
@@ -42,4 +47,16 @@ body {
     position: absolute;
     bottom: 0;
     background-color: aqua;
+}
+
+/* .windowContainer {
+    display: none;
+} */
+
+#session_side .windowContainer {
+    display: none;
+}
+
+#open_session_container .windowContainer {
+    display: block;
 }

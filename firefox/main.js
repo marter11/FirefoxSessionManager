@@ -39,9 +39,13 @@ function saveInfoFromOpenWindows(session_name, tabsArray)
 }
 
 
-function displayWinowInstances(event)
+function displayWinowInstancesOnRight(event)
 {
-    // const location = 
+    const location = document.getElementById("open_session_container");
+    location.innerHTML = event.target.innerHTML;
+
+    // console.log(event.target.children);
+    // console.log(event.target.innerHTML);
 }
 
 // An instance of this represents the session itself
@@ -52,6 +56,7 @@ class sessionSectionConstructor
         this.newSessionContainer = document.createElement("div");
         this.newSessionContainer.setAttribute("class", "sessionContainer");
         this.newSessionContainer.innerText = session_name;
+        this.newSessionContainer.onclick = displayWinowInstancesOnRight;
     }
 
     // Automatically add it to the current session, which is the created object
@@ -62,7 +67,7 @@ class sessionSectionConstructor
         newwindowContainer.setAttribute("class", "windowContainer");
 
         // Reveal when session container is clicked
-        newwindowContainer.setAttribute("hidden", true);
+        // newwindowContainer.setAttribute("hidden", true);
 
         this.newSessionContainer.appendChild(newwindowContainer);
 
