@@ -44,7 +44,7 @@ function displayWinowInstancesOnRight(event)
     const location = document.getElementById("open_session_container");
     location.innerHTML = event.target.innerHTML;
 
-    // console.log(event.target.children);
+    console.log(event.target.innerHTML);
     // console.log(event.target.innerHTML);
 }
 
@@ -81,11 +81,21 @@ class sessionSectionConstructor
         newtabContainer.setAttribute("class", "tabContainer");
 
         // Add title paragraph
-        let tabTitle = document.createElement("p");
+        let tabTitle = document.createElement("a");
+        tabTitle.setAttribute("class", "title_container");
+        tabTitle.setAttribute("href", tab.url);
         tabTitle.innerText = tab.title;
 
-        // Add favico
+        // Add favicon
+        let favicon = document.createElement("img");
+        favicon.style.width = "16px";
+        favicon.style.height = "16px";
+        favicon.src = tab.favicon;
+        favicon.setAttribute("class", "f_favicon");
 
+        // console.log(favicon);
+
+        newtabContainer.appendChild(favicon);
         newtabContainer.appendChild(tabTitle);
         to_window.appendChild(newtabContainer);
     }
@@ -124,6 +134,8 @@ function DisplayFromLocalStorage()
         
         // Insert the whole local storage into the session display section
         const session_keys = Object.keys(all_session_object);
+
+        console.log(all_session_object)
 
         for(const session_key of session_keys)
         {

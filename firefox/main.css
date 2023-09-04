@@ -57,6 +57,33 @@ body {
     display: none;
 }
 
+/* Right side where the windows and tabs are displayed after the
+    session on the left side is clicked */
+
 #open_session_container .windowContainer {
-    display: block;
+    
 }
+
+#open_session_container .windowContainer .tabContainer {
+    display: flex;
+    flex-direction: row;
+    /* border: 1px solid red; */
+}
+
+.f_favicon {
+    display: block;
+    margin: auto 0% auto 0%;
+}
+
+.title_container {
+    margin-left: 1%;
+    /* flex: 80%; */
+    /* border: 1px solid black; */
+}
+
+/* .tabContainer {
+} */
+
+/* .faviconP {
+    border: 1px solid black;
+} */
