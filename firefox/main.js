@@ -66,9 +66,17 @@ class sessionSectionConstructor
         let newwindowContainer = document.createElement("div");
         newwindowContainer.setAttribute("class", "windowContainer");
 
+        let windowName = document.createElement("p");
+        windowName.setAttribute("class", "windowName");
+        if(!window.name)
+        {
+            windowName.innerText = "Unnamed window";
+        }
+
         // Reveal when session container is clicked
         // newwindowContainer.setAttribute("hidden", true);
 
+        this.newSessionContainer.appendChild(windowName);
         this.newSessionContainer.appendChild(newwindowContainer);
 
         return newwindowContainer;
@@ -135,7 +143,7 @@ function DisplayFromLocalStorage()
         // Insert the whole local storage into the session display section
         const session_keys = Object.keys(all_session_object);
 
-        console.log(all_session_object)
+        console.log(all_session_object);
 
         for(const session_key of session_keys)
         {
