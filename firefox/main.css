@@ -13,8 +13,11 @@ body {
 
 #header {
     top: 0;
-    background-color: #65812B;
-    /* background-color: #E7EBDE; */
+    /* background-color: #65812B; */
+
+    background-color: rgba(4,124,58,255);
+    /* background-color: rgba(77,172,119,255); */
+
     min-width: 700px;
     min-height: 60px;
 }
@@ -25,7 +28,6 @@ body {
 }
 
 #left {
-    /* position: relative; */
     flex: 40%;
     min-height: 500px;
     min-width: var(--left-width);
@@ -54,6 +56,9 @@ body {
     display: none;
 } */
 
+
+/* Left side of page where the all the saved session names are disployed */
+
 #session_side .windowContainer {
     display: none;
 }
@@ -62,12 +67,20 @@ body {
     display: none;
 }
 
+#session_side .sessionContainer {
+    margin: 1em;
+    background-color: rgba(209,230,218,255);
+    /* background-color: rgba(77,172,119,255); */
+}
+
 /* Right side where the windows and tabs are displayed after the
     session on the left side is clicked */
 
 /* Center the name of the currently selected window */
 #open_session_container {
     text-align: center;
+    /* background-color: rgba(77,172,119,255); */
+    background-color: rgba(209,230,218,255);
 }
 
 #open_session_container .windowContainer {
