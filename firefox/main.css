@@ -37,6 +37,26 @@ body {
     padding: 0.5em;
 }
 
+.tabContainer {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.tabContainer .f_favicon {
+    margin: 0em 0.2em;
+}
+
+.tabContainer {
+    margin: 0.3em 0em;
+}
+
+.windowContainer {
+    margin: 1em;
+    /* margin-top: 0; */
+    /* background-color: #d1e6da; */
+}
+
 .nameAndWindowContainer .windowName {
     background-color: #4dac77;
     padding: 0.2em 1em;
