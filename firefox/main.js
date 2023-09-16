@@ -208,6 +208,20 @@ document.addEventListener("submit", (e) => {
     e.preventDefault();
 });
 
+document.addEventListener("dblclick", (e) => {
+    e.preventDefault();
+
+    // Open session on double click at session name
+    if(e.target.className === "sessionName" && e.target.parentElement.parentElement.id === "session_side")
+    {
+        browser.storage.local.get()
+        .then((session => {
+            console.log(session[e.target.innerText]);
+        }))
+        .catch(err => {console.log(err)});
+    }
+});
+
 document.addEventListener("click", (e) => {
     let id = e.target.id;
     if(id == "save_session")
@@ -221,6 +235,3 @@ document.addEventListener("click", (e) => {
         }
     }
 });
-
-
-
