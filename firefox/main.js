@@ -1,4 +1,8 @@
- 
+
+
+state_container = {
+    "last_clicked_session_name": undefined
+}
 
 function getInfoFromOpenWindows()
 {
@@ -41,11 +45,19 @@ function saveInfoFromOpenWindows(session_name, tabsArray)
 
 function displayWinowInstancesOnRight(event)
 {
-    const location = document.getElementById("open_session_container");
-    location.innerHTML = event.target.innerHTML;
+    let last = state_container["last_clicked_session_name"]
+    if(event.target != last) {
 
-    console.log(event.target.innerHTML);
-    // console.log(event.target.innerHTML);
+        const location = document.getElementById("open_session_container");
+        location.innerHTML = "";
+
+        // location.innerHTML = event.target.parentElement.innerHTML;
+        location.appendChild(event.target.parentElement.cloneNode(true));
+        
+        event.target.style.backgroundColor = "#B1B2B5";
+        if(last) last.style.removeProperty("background-color");
+        state_container["last_clicked_session_name"] = event.target;
+    } 
 }
 
 // An instance of this represents the session itself
@@ -55,13 +67,21 @@ class sessionSectionConstructor
     {
         this.newSessionContainer = document.createElement("div");
         this.newSessionContainer.setAttribute("class", "sessionContainer");
-        this.newSessionContainer.innerText = session_name;
+
+        let sessionName = document.createElement("p");
+        sessionName.setAttribute("class", "sessionName")
+        sessionName.innerText = session_name;
+
+        this.newSessionContainer.appendChild(sessionName);
         this.newSessionContainer.onclick = displayWinowInstancesOnRight;
     }
 
     // Automatically add it to the current session, which is the created object
     addNewWindow(window)
     {
+
+        let nameAndWindowContainer = document.createElement("div");
+        nameAndWindowContainer.setAttribute("class", "nameAndWindowContainer");
 
         let newwindowContainer = document.createElement("div");
         newwindowContainer.setAttribute("class", "windowContainer");
@@ -76,8 +96,9 @@ class sessionSectionConstructor
         // Reveal when session container is clicked
         // newwindowContainer.setAttribute("hidden", true);
 
-        this.newSessionContainer.appendChild(windowName);
-        this.newSessionContainer.appendChild(newwindowContainer);
+        nameAndWindowContainer.appendChild(windowName);
+        nameAndWindowContainer.appendChild(newwindowContainer);
+        this.newSessionContainer.appendChild(nameAndWindowContainer);
 
         return newwindowContainer;
 
