@@ -14,6 +14,12 @@
     "permissions": [
         "tabs",
         "storage"
-    ]
+    ],
+
+    "browser_specific_settings": {
+        "gecko": {
+            "id": "abb@example.llp"
+        }
+    }
 
 }

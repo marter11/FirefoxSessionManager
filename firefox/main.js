@@ -164,7 +164,7 @@ function DisplayFromLocalStorage()
         // Insert the whole local storage into the session display section
         const session_keys = Object.keys(all_session_object);
 
-        console.log(all_session_object);
+        // console.log(all_session_object);
 
         for(const session_key of session_keys)
         {
@@ -216,7 +216,22 @@ document.addEventListener("dblclick", (e) => {
     {
         browser.storage.local.get()
         .then((session => {
-            console.log(session[e.target.innerText]);
+
+            // Browser window open functions
+            for(let window of session[e.target.innerText])
+            {
+                // Filter out illegal urls like about:config and view:ho
+                const protocolRe = /^(http|https):\/\//
+                let tabUrls = window.map((tab) => {
+                    if(protocolRe.exec(tab.url))
+                    {
+                        return tab.url
+                    }
+                });
+
+                tabUrls = tabUrls.filter((e) => e);
+            }
+
         }))
         .catch(err => {console.log(err)});
     }
