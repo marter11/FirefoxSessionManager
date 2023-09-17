@@ -230,6 +230,7 @@ document.addEventListener("dblclick", (e) => {
                 });
 
                 tabUrls = tabUrls.filter((e) => e);
+                browser.windows.create({url: tabUrls});
             }
 
         }))
@@ -246,6 +247,7 @@ document.addEventListener("click", (e) => {
         {
             console.log("ERROR");
         } else {
+            document.getElementById("session_side").innerHTML = "";
             saveSession(session_name);
         }
     }
